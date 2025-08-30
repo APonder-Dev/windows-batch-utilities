@@ -1,0 +1,25 @@
+name: Release ZIP
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  zip:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make dist folder
+        run: |
+          if (Test-Path dist) { Remove-Item -Recurse -Force dist }
+          New-Item -ItemType Directory -Path dist | Out-Null
+          Copy-Item *.bat dist/
+          Copy-Item README.md dist/
+          Copy-Item LICENSE dist/
+      - name: Create zip
+        run: Compress-Archive -Path dist\* -DestinationPath windows-batch-utilities.zip -Force
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: windows-batch-utilities.zip

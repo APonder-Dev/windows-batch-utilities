@@ -1,0 +1,11 @@
+# Windows junk
+Thumbs.db
+Desktop.ini
+
+# Reports from sysinfo_snapshot
+scripts/reports/
+
+# Logs/backups
+*.log
+*.bak
+*.old
