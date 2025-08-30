@@ -8,7 +8,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
-- Planned utilities: network diagnostic, cache cleaner, backup, file organizer, large file hunter, Wi-Fi exporter, hosts toggle, git helper, ping sweep, update checker.
+- Planned utilities: cache cleaner, backup, file organizer, large file hunter, Wi-Fi exporter, hosts toggle, git helper, ping sweep, update checker.
+
+---
+
+## [1.1.0] - 2025-08-30
+### Added
+- `scripts/net_quickdiag.bat` — quick network health checks (gateway, DNS, internet, routes, netstat, DNS cache).
+
+### Changed
+- `scripts/menu_launcher.bat` — added menu option for Network Quick Diagnostic.
+- `README.md` — moved Network Quick Diagnostic from Roadmap to Available Scripts.
+- `CHANGELOG.md` — project history and version tracking.
 
 ---
 
@@ -24,5 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/APonder-Dev/windows-batch-utilities/releases/tag/v1.1.0
 [1.0.0]: https://github.com/APonder-Dev/windows-batch-utilities/releases/tag/v1.0.0

@@ -26,6 +26,17 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
     ```
   - Great for troubleshooting or documentation snapshots.
 
+### 🌐 Network Quick Diagnostic
+- **File:** [`net_quickdiag.bat`](./scripts/net_quickdiag.bat)  
+- **Description:** Quickly checks IP config, pings your default gateway and public DNS, verifies DNS resolution, prints route table, active connections, and DNS cache.
+- **Features:**
+  - Shows IPv4/Subnet/Default Gateway.
+  - Pings your default gateway.
+  - Verifies DNS resolution with `nslookup`.
+  - Tests internet reachability (1.1.1.1 & 8.8.8.8).
+  - Prints route table and active connections.
+  - Displays DNS cache entries.
+
 ---
 
 ## 🛠 Installation
@@ -67,7 +78,6 @@ scripts\sysinfo_snapshot.bat
 
 Planned future scripts include:
 
-- 🌐 **Network Quick Diagnostic** — ping gateway, DNS, external IPs, show routes.  
 - 🧹 **Temp & Cache Cleaner** — wipe safe temp folders and browser caches.  
 - 💾 **Smart Backup** — incremental backups via `robocopy`.  
 - 🗂️ **File Organizer** — sort files into extension-based folders.  
@@ -76,7 +86,7 @@ Planned future scripts include:
 - 📝 **Hosts Toggle** — swap between dev and default hosts file.  
 - 🔧 **Git Quick Helper** — `git add + commit + push` shortcut.  
 - 📶 **Ping Sweep** — scan local subnet for alive hosts.  
-- 🔄 **Windows Update Check** — list available updates (PowerShell required).
+- 🔄 **Windows Update Check** — list available updates (PowerShell required).  
 
 ---
 
@@ -97,8 +107,9 @@ Workflow file: `.github/workflows/release.yml`
 .
 ├─ scripts/                  # All batch scripts live here
 │  ├─ menu_launcher.bat
+│  ├─ net_quickdiag.bat
 │  ├─ sysinfo_snapshot.bat
-│  └─ reports/               # Auto-created by sysinfo_snapshot
+│  └─ reports/               # Auto-created by sysinfo_snapshot (Will not see this yet.)
 │     └─ <yyyy-MM-dd_HH-mm-ss>/
 │        ├─ systeminfo.txt
 │        ├─ ipconfig_all.txt
