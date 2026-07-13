@@ -1,48 +1,64 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
+title Network Quick Diag
 
-title Network QuickDiag
-echo ==== Network QuickDiag ====
-echo Date: %date%  Time: %time%
+echo ============================================================
+echo                   Network Quick Diag
+echo ============================================================
+echo  Date : %date%   Time : %time%
+echo ============================================================
 echo.
 
-echo [1/7] IP configuration (IPv4/Subnet/Gateway)
-ipconfig | findstr /i "IPv4 Subnet Default" || ipconfig
+echo [1/7] IP Configuration (IPv4 / Subnet / Gateway / DNS)
+echo --------------------------------------------------------
+ipconfig | findstr /i "IPv4 Subnet Default DNS"
 echo.
 
-echo [2/7] Default gateway ping
+echo [2/7] Default Gateway Ping
+echo --------------------------------------------------------
 set "GW="
-for /f "tokens=3 delims= " %%g in ('ipconfig ^| findstr /i "Default Gateway"') do (
-  if not "%%g"=="" set "GW=%%g"
-)
+for /f "usebackq delims=" %%g in (`powershell -NoProfile -Command "(Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway } | Select-Object -First 1).IPv4DefaultGateway.NextHop" 2^>nul`) do set "GW=%%g"
 if defined GW (
-  echo Pinging gateway: %GW%
-  ping -n 4 %GW%
+    echo Pinging gateway: %GW%
+    ping -n 4 %GW%
+    if errorlevel 1 (echo  Status: UNREACHABLE) else (echo  Status: OK)
 ) else (
-  echo No default gateway found.
+    echo No default gateway found.
 )
 echo.
 
-echo [3/7] DNS check (nslookup microsoft.com)
+echo [3/7] DNS Resolution  (nslookup microsoft.com)
+echo --------------------------------------------------------
 nslookup microsoft.com
 echo.
 
-echo [4/7] Internet reachability
-ping -n 4 1.1.1.1
-ping -n 4 8.8.8.8
+echo [4/7] Internet Reachability
+echo --------------------------------------------------------
+echo  Pinging 1.1.1.1 (Cloudflare)...
+ping -n 3 1.1.1.1
+if errorlevel 1 (echo  Status: UNREACHABLE) else (echo  Status: OK)
+echo.
+echo  Pinging 8.8.8.8 (Google)...
+ping -n 3 8.8.8.8
+if errorlevel 1 (echo  Status: UNREACHABLE) else (echo  Status: OK)
 echo.
 
-echo [5/7] Route table
+echo [5/7] Route Table
+echo --------------------------------------------------------
 route print
 echo.
 
-echo [6/7] Active connections (first page)
-netstat -ano | more
+echo [6/7] Active Connections
+echo --------------------------------------------------------
+netstat -ano
 echo.
 
-echo [7/7] Current DNS cache (first page)
-ipconfig /displaydns | more
+echo [7/7] DNS Cache
+echo --------------------------------------------------------
+ipconfig /displaydns
 echo.
 
-echo Done.
+echo ============================================================
+echo  Done.
+echo ============================================================
 endlocal
