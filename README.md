@@ -11,10 +11,10 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
 - **File:** [`menu_launcher.bat`](./scripts/menu_launcher.bat)
 - **Description:** A text-based launcher that allows you to easily run any of the available batch utilities.
 - **Features:**
-  - Clean console menu with tools grouped by category (Diagnostics / Maintenance).
+  - Clean console menu with tools grouped by category (Diagnostics / Maintenance / Files).
   - Shows current date, time, and whether you are running as Administrator.
   - Short description next to every option.
-  - `R` shortcut opens the `reports/` folder in Explorer.
+  - `R` opens the `reports/` folder, `L` opens the backup `logs/` folder in Explorer.
   - Friendly handling of invalid selections.
   - Designed to scale as more utilities are added.
 
@@ -67,6 +67,17 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
     scripts/logs/backup_<yyyy-MM-dd_HH-mm-ss>.log
     ```
 
+### File Organizer
+- **File:** [`file_organizer.bat`](./scripts/file_organizer.bat)
+- **Description:** Sorts the files in a folder (e.g. Downloads) into tidy subfolders, with a preview before anything moves.
+- **Features:**
+  - **By type** (default): groups files into Images, Documents, Videos, Music, Archives, Programs, and Other.
+  - **By extension**: one folder per extension (`jpg/`, `pdf/`, ...).
+  - Shows a full plan (how many files go where) and asks for confirmation before moving anything.
+  - Only touches top-level files — existing subfolders are left alone.
+  - Name clashes are resolved safely with `_1`, `_2`, ... suffixes; nothing is ever overwritten.
+  - Remembers your last folder — just press Enter to reuse it.
+
 ---
 
 ## Installation
@@ -102,6 +113,7 @@ Example:
 scripts\sysinfo_snapshot.bat
 scripts\temp_cleaner.bat
 scripts\smart_backup.bat
+scripts\file_organizer.bat
 ```
 
 > **Tip:** Run `temp_cleaner.bat` as Administrator to also clean `C:\Windows\Temp`.
@@ -112,7 +124,6 @@ scripts\smart_backup.bat
 
 Planned future scripts include:
 
-- **File Organizer** — sort files into extension-based folders.
 - **Large File Hunter** — find largest files recursively.
 - **Wi-Fi Profile Exporter** — dump saved Wi-Fi profiles to XML.
 - **Hosts Toggle** — swap between dev and default hosts file.
@@ -138,6 +149,7 @@ Workflow file: `.github/workflows/release.yml`
 ```
 .
 ├─ scripts/                  # All batch scripts live here
+│  ├─ file_organizer.bat
 │  ├─ menu_launcher.bat
 │  ├─ net_quickdiag.bat
 │  ├─ smart_backup.bat
