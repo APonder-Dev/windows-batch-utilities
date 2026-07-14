@@ -8,7 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Planned
-- Smart Backup — incremental backups via `robocopy`.
 - File Organizer — sort files into extension-based folders.
 - Large File Hunter — find largest files recursively.
 - Wi-Fi Profile Exporter — dump saved Wi-Fi profiles to XML.
@@ -16,6 +15,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Git Quick Helper — `git add + commit + push` shortcut.
 - Ping Sweep — scan local subnet for alive hosts.
 - Windows Update Check — list available updates (PowerShell required).
+
+---
+
+## [1.3.0] - 2026-07-14
+### Added
+- `scripts/smart_backup.bat` — incremental folder backups via `robocopy`; Incremental (copy new/updated only) and Mirror (exact copy) modes; remembers last-used source/destination in `smart_backup.ini`; validates paths and confirms before running; multi-threaded copy with timestamped logs under `scripts/logs/`.
+
+### Changed
+- `scripts/menu_launcher.bat` — redesigned layout: tools grouped by category (Diagnostics / Maintenance), short description per option, date/time and Administrator status in the header, `R` shortcut to open the reports folder, friendly invalid-input handling; suppressed `mode con` errors on terminals that do not support resizing.
+- `README.md` — documented Smart Backup and the new menu; moved Smart Backup from Roadmap to Available Scripts; updated repo structure.
+- `.gitignore` — exclude `scripts/logs/` and `scripts/smart_backup.ini`.
 
 ---
 
@@ -54,7 +64,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/APonder-Dev/windows-batch-utilities/releases/tag/v1.1.0
 [1.0.0]: https://github.com/APonder-Dev/windows-batch-utilities/releases/tag/v1.0.0

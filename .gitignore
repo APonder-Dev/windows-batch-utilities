@@ -9,3 +9,7 @@ scripts/reports/
 *.log
 *.bak
 *.old
+
+# Smart Backup state
+scripts/logs/
+scripts/smart_backup.ini

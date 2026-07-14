@@ -1,26 +1,70 @@
 @echo off
-title Project Tools Menu
-mode con: cols=80 lines=25
+setlocal
+title Windows Batch Utilities
+mode con: cols=64 lines=32 >nul 2>&1
 color 0A
 
 :: Always run relative to this script's folder
 cd /d "%~dp0"
 
+:: Admin check (shown in header)
+net session >nul 2>&1
+if "%errorlevel%"=="0" (set "_mode=Administrator") else (set "_mode=Standard User")
+
 :menu
 cls
-echo ========================================================
-echo                APonder - Project Tools
-echo ========================================================
-echo  1) System Info Snapshot
-echo  2) Network Quick Diag
-echo  3) Temp and Cache Cleaner
-echo  X) Exit
+echo ============================================================
+echo                  Windows Batch Utilities
+echo ============================================================
+echo  Date : %date%   Time : %time:~0,8%
+echo  Mode : %_mode%
+echo ============================================================
 echo.
-set /p choice="Select: "
+echo   DIAGNOSTICS
+echo   ------------------------------------------------------
+echo   1. System Info Snapshot    Save full report to reports\
+echo   2. Network Quick Diag      Gateway, DNS, internet checks
+echo.
+echo   MAINTENANCE
+echo   ------------------------------------------------------
+echo   3. Temp and Cache Cleaner  Free disk space safely
+echo   4. Smart Backup            Incremental robocopy backup
+echo.
+echo   OTHER
+echo   ------------------------------------------------------
+echo   R. Open reports folder
+echo   X. Exit
+echo.
+echo ============================================================
+set "choice="
+set /p "choice=  Select an option: "
 
-if /i "%choice%"=="1" call "%~dp0sysinfo_snapshot.bat" & pause & goto menu
-if /i "%choice%"=="2" call "%~dp0net_quickdiag.bat" & pause & goto menu
-if /i "%choice%"=="3" call "%~dp0temp_cleaner.bat" & pause & goto menu
+if /i "%choice%"=="1" call :run sysinfo_snapshot.bat & goto menu
+if /i "%choice%"=="2" call :run net_quickdiag.bat & goto menu
+if /i "%choice%"=="3" call :run temp_cleaner.bat & goto menu
+if /i "%choice%"=="4" call :run smart_backup.bat & goto menu
+if /i "%choice%"=="r" goto reports
 if /i "%choice%"=="x" exit /b
 
+echo.
+echo   [X] Invalid option: "%choice%" - choose 1-4, R, or X.
+timeout /t 2 >nul
+goto menu
+
+:run
+cls
+call "%~dp0%~1"
+echo.
+echo ------------------------------------------------------------
+pause
+goto :eof
+
+:reports
+if exist "%~dp0reports" (
+    start "" explorer "%~dp0reports"
+) else (
+    echo.
+    echo   No reports yet - run System Info Snapshot first.
+    timeout /t 2 >nul
+)
 goto menu

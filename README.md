@@ -11,8 +11,11 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
 - **File:** [`menu_launcher.bat`](./scripts/menu_launcher.bat)
 - **Description:** A text-based launcher that allows you to easily run any of the available batch utilities.
 - **Features:**
-  - Clean console menu.
-  - Calls other scripts automatically.
+  - Clean console menu with tools grouped by category (Diagnostics / Maintenance).
+  - Shows current date, time, and whether you are running as Administrator.
+  - Short description next to every option.
+  - `R` shortcut opens the `reports/` folder in Explorer.
+  - Friendly handling of invalid selections.
   - Designed to scale as more utilities are added.
 
 ### System Info Snapshot
@@ -49,6 +52,21 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
   - Shows MB freed on `C:` before and after cleanup.
   - Requires confirmation before deleting anything.
 
+### Smart Backup
+- **File:** [`smart_backup.bat`](./scripts/smart_backup.bat)
+- **Description:** Incremental folder backups powered by `robocopy`, with remembered paths and timestamped logs.
+- **Features:**
+  - **Incremental mode** (default): copies only new and updated files — nothing is ever deleted.
+  - **Mirror mode**: makes the destination an exact copy of the source (with an explicit warning, since extra files in the destination are deleted).
+  - Remembers your last source/destination — just press Enter to reuse them.
+  - Validates paths, offers to create the destination, and asks for confirmation before running.
+  - Multi-threaded copy (`/MT:8`) with retry handling for locked files.
+  - Clear Pass/Fail summary based on robocopy exit codes.
+  - Full logs saved to:
+    ```
+    scripts/logs/backup_<yyyy-MM-dd_HH-mm-ss>.log
+    ```
+
 ---
 
 ## Installation
@@ -83,6 +101,7 @@ Example:
 ```bat
 scripts\sysinfo_snapshot.bat
 scripts\temp_cleaner.bat
+scripts\smart_backup.bat
 ```
 
 > **Tip:** Run `temp_cleaner.bat` as Administrator to also clean `C:\Windows\Temp`.
@@ -93,7 +112,6 @@ scripts\temp_cleaner.bat
 
 Planned future scripts include:
 
-- **Smart Backup** — incremental backups via `robocopy`.
 - **File Organizer** — sort files into extension-based folders.
 - **Large File Hunter** — find largest files recursively.
 - **Wi-Fi Profile Exporter** — dump saved Wi-Fi profiles to XML.
@@ -122,8 +140,11 @@ Workflow file: `.github/workflows/release.yml`
 ├─ scripts/                  # All batch scripts live here
 │  ├─ menu_launcher.bat
 │  ├─ net_quickdiag.bat
+│  ├─ smart_backup.bat
 │  ├─ sysinfo_snapshot.bat
 │  ├─ temp_cleaner.bat
+│  ├─ logs/                  # Auto-created by smart_backup (gitignored)
+│  │  └─ backup_<yyyy-MM-dd_HH-mm-ss>.log
 │  └─ reports/               # Auto-created by sysinfo_snapshot
 │     └─ <yyyy-MM-dd_HH-mm-ss>/
 │        ├─ systeminfo.txt
