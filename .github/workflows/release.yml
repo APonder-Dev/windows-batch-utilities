@@ -14,8 +14,9 @@ jobs:
         run: |
           if (Test-Path dist) { Remove-Item -Recurse -Force dist }
           New-Item -ItemType Directory -Path dist | Out-Null
-          Copy-Item *.bat dist/
+          Copy-Item scripts\*.bat dist/
           Copy-Item README.md dist/
+          Copy-Item CHANGELOG.md dist/
           Copy-Item LICENSE dist/
       - name: Create zip
         run: Compress-Archive -Path dist\* -DestinationPath windows-batch-utilities.zip -Force
