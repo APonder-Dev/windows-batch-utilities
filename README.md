@@ -78,6 +78,17 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
   - Name clashes are resolved safely with `_1`, `_2`, ... suffixes; nothing is ever overwritten.
   - Remembers your last folder — just press Enter to reuse it.
 
+### Large File Hunter
+- **File:** [`large_file_hunter.bat`](./scripts/large_file_hunter.bat)
+- **Description:** Recursively finds the biggest files under a folder so you can see what is eating your disk.
+- **Features:**
+  - **Top N mode** (default): lists the N largest files (you pick N, default 25).
+  - **Size limit mode**: lists every file over a minimum size in MB.
+  - Scans all subfolders; access-denied files are skipped silently.
+  - Sizes shown in MB/GB with full file paths, plus a total scanned summary.
+  - Optionally saves the results to `scripts/reports/large_files_<yyyy-MM-dd_HH-mm-ss>.txt`.
+  - Remembers your last folder — just press Enter to reuse it.
+
 ---
 
 ## Installation
@@ -114,6 +125,7 @@ scripts\sysinfo_snapshot.bat
 scripts\temp_cleaner.bat
 scripts\smart_backup.bat
 scripts\file_organizer.bat
+scripts\large_file_hunter.bat
 ```
 
 > **Tip:** Run `temp_cleaner.bat` as Administrator to also clean `C:\Windows\Temp`.
@@ -124,7 +136,6 @@ scripts\file_organizer.bat
 
 Planned future scripts include:
 
-- **Large File Hunter** — find largest files recursively.
 - **Wi-Fi Profile Exporter** — dump saved Wi-Fi profiles to XML.
 - **Hosts Toggle** — swap between dev and default hosts file.
 - **Git Quick Helper** — `git add + commit + push` shortcut.
@@ -150,6 +161,7 @@ Workflow file: `.github/workflows/release.yml`
 .
 ├─ scripts/                  # All batch scripts live here
 │  ├─ file_organizer.bat
+│  ├─ large_file_hunter.bat
 │  ├─ menu_launcher.bat
 │  ├─ net_quickdiag.bat
 │  ├─ smart_backup.bat
@@ -157,7 +169,8 @@ Workflow file: `.github/workflows/release.yml`
 │  ├─ temp_cleaner.bat
 │  ├─ logs/                  # Auto-created by smart_backup (gitignored)
 │  │  └─ backup_<yyyy-MM-dd_HH-mm-ss>.log
-│  └─ reports/               # Auto-created by sysinfo_snapshot
+│  └─ reports/               # Auto-created by sysinfo_snapshot / large_file_hunter
+│     ├─ large_files_<yyyy-MM-dd_HH-mm-ss>.txt
 │     └─ <yyyy-MM-dd_HH-mm-ss>/
 │        ├─ systeminfo.txt
 │        ├─ ipconfig_all.txt

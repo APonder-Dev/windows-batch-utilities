@@ -14,3 +14,4 @@ scripts/reports/
 scripts/logs/
 scripts/smart_backup.ini
 scripts/file_organizer.ini
+scripts/large_file_hunter.ini
