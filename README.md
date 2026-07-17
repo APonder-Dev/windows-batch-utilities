@@ -11,7 +11,7 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
 - **File:** [`menu_launcher.bat`](./scripts/menu_launcher.bat)
 - **Description:** A text-based launcher that allows you to easily run any of the available batch utilities.
 - **Features:**
-  - Clean console menu with tools grouped by category (Diagnostics / Maintenance / Files).
+  - Clean console menu with tools grouped by category (System / Network / Files).
   - Shows current date, time, and whether you are running as Administrator.
   - Short description next to every option.
   - `R` opens the `reports/` folder, `L` opens the backup `logs/` folder in Explorer.
@@ -89,6 +89,19 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
   - Optionally saves the results to `scripts/reports/large_files_<yyyy-MM-dd_HH-mm-ss>.txt`.
   - Remembers your last folder — just press Enter to reuse it.
 
+### Wi-Fi Profile Exporter
+- **File:** [`wifi_profile_exporter.bat`](./scripts/wifi_profile_exporter.bat)
+- **Description:** Backs up every saved Wi-Fi profile to XML files you can restore on any PC with `netsh wlan add profile`.
+- **Features:**
+  - Lists all saved profiles with a count before doing anything.
+  - Exports **without passwords** by default; optional **plain-text password** export when run as Administrator (with a clear warning).
+  - Exports to a timestamped folder:
+    ```
+    scripts/reports/wifi_profiles_<yyyy-MM-dd_HH-mm-ss>/
+    ```
+  - Verifies and reports how many profiles were actually exported.
+  - Friendly messages when there is no wireless adapter or no saved profiles.
+
 ---
 
 ## Installation
@@ -126,6 +139,7 @@ scripts\temp_cleaner.bat
 scripts\smart_backup.bat
 scripts\file_organizer.bat
 scripts\large_file_hunter.bat
+scripts\wifi_profile_exporter.bat
 ```
 
 > **Tip:** Run `temp_cleaner.bat` as Administrator to also clean `C:\Windows\Temp`.
@@ -136,7 +150,6 @@ scripts\large_file_hunter.bat
 
 Planned future scripts include:
 
-- **Wi-Fi Profile Exporter** — dump saved Wi-Fi profiles to XML.
 - **Hosts Toggle** — swap between dev and default hosts file.
 - **Git Quick Helper** — `git add + commit + push` shortcut.
 - **Ping Sweep** — scan local subnet for alive hosts.
@@ -167,10 +180,12 @@ Workflow file: `.github/workflows/release.yml`
 │  ├─ smart_backup.bat
 │  ├─ sysinfo_snapshot.bat
 │  ├─ temp_cleaner.bat
+│  ├─ wifi_profile_exporter.bat
 │  ├─ logs/                  # Auto-created by smart_backup (gitignored)
 │  │  └─ backup_<yyyy-MM-dd_HH-mm-ss>.log
-│  └─ reports/               # Auto-created by sysinfo_snapshot / large_file_hunter
+│  └─ reports/               # Auto-created by report-producing tools
 │     ├─ large_files_<yyyy-MM-dd_HH-mm-ss>.txt
+│     ├─ wifi_profiles_<yyyy-MM-dd_HH-mm-ss>/
 │     └─ <yyyy-MM-dd_HH-mm-ss>/
 │        ├─ systeminfo.txt
 │        ├─ ipconfig_all.txt

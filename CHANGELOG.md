@@ -17,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.6.0] - 2026-07-15
+### Added
+- `scripts/wifi_profile_exporter.bat` — backs up all saved Wi-Fi profiles to XML via `netsh wlan export profile`; lists profiles with a count first; passwordless export by default with optional plain-text password export as Administrator; timestamped output folder under `scripts/reports/`; verifies the exported file count; exports from inside the destination folder (`folder=.`) to work around netsh path mis-parsing.
+
+### Changed
+- `scripts/menu_launcher.bat` — regrouped the menu into SYSTEM / NETWORK / FILES categories with logical renumbering (1 Sysinfo, 2 Temp Cleaner, 3 Net Diag, 4 Wi-Fi Exporter, 5 Backup, 6 Organizer, 7 Hunter); version bumped in header.
+- `README.md` — documented Wi-Fi Profile Exporter; moved it from Roadmap to Available Scripts; updated menu categories and repo structure.
+
+---
+
 ## [1.5.0] - 2026-07-15
 ### Added
 - `scripts/large_file_hunter.bat` — recursively finds the biggest files under a folder; Top N mode (default 25) or minimum-size mode (default 100 MB); MB/GB sizes with full paths and a total-scanned summary; optional report saved to `scripts/reports/large_files_<timestamp>.txt`; remembers the last-used folder in `large_file_hunter.ini`.
@@ -86,7 +96,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.2.0...v1.3.0
