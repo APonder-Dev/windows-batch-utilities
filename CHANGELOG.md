@@ -17,6 +17,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.8.0] - 2026-07-17
+### Added
+- `scripts/git_quick_helper.bat` — stage + commit + push any repo in one go; shows branch and `git status --short` preview before prompting; requires a commit message and confirmation; sets upstream automatically on first push; offers push-only when the tree is clean but commits are unpushed; guards for missing git, non-repos, detached HEAD, and failed pushes; remembers the last repo in `git_quick_helper.ini`.
+
+### Changed
+- `scripts/menu_launcher.bat` — new DEV category with Git Quick Helper as option 9; version bumped in header; taller window.
+- `README.md` — documented Git Quick Helper; moved it from Roadmap to Available Scripts; updated repo structure.
+- `.gitignore` — exclude `scripts/git_quick_helper.ini`.
+
+---
+
+## [1.7.0] - 2026-07-16
+### Added
+- `scripts/hosts_toggle.bat` — swap the Windows hosts file between DEV and DEFAULT profiles; header shows the currently active profile via a marker comment; save either profile from the live hosts file; edit the DEV profile in Notepad; switching backs up the old hosts to `hosts.previous` and flushes the DNS cache; first run offers to snapshot the current hosts as DEFAULT; switching requires Administrator (gated with a clear message).
+
+### Changed
+- `scripts/menu_launcher.bat` — added Hosts Toggle as option 5 under NETWORK; FILES renumbered to 6-8; version bumped in header; taller window.
+- `README.md` — documented Hosts Toggle; moved it from Roadmap to Available Scripts; updated repo structure.
+- `.gitignore` — exclude `scripts/hosts_profiles/`.
+
+---
+
 ## [1.6.0] - 2026-07-15
 ### Added
 - `scripts/wifi_profile_exporter.bat` — backs up all saved Wi-Fi profiles to XML via `netsh wlan export profile`; lists profiles with a count first; passwordless export by default with optional plain-text password export as Administrator; timestamped output folder under `scripts/reports/`; verifies the exported file count; exports from inside the destination folder (`folder=.`) to work around netsh path mis-parsing.
@@ -96,7 +118,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.7.0...v1.8.0
+[1.7.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.3.0...v1.4.0

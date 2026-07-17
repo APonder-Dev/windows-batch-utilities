@@ -1,7 +1,7 @@
 @echo off
 setlocal
 title Windows Batch Utilities
-mode con: cols=64 lines=38 >nul 2>&1
+mode con: cols=64 lines=42 >nul 2>&1
 color 0A
 
 :: Always run relative to this script's folder
@@ -14,7 +14,7 @@ if "%errorlevel%"=="0" (set "_mode=Administrator") else (set "_mode=Standard Use
 :menu
 cls
 echo ============================================================
-echo               Windows Batch Utilities  v1.6.0
+echo               Windows Batch Utilities  v1.8.0
 echo ============================================================
 echo  Date : %date%   Time : %time:~0,8%
 echo  Mode : %_mode%
@@ -29,12 +29,17 @@ echo   NETWORK
 echo   ------------------------------------------------------
 echo   3. Network Quick Diag      Gateway, DNS, internet checks
 echo   4. Wi-Fi Profile Exporter  Back up Wi-Fi profiles to XML
+echo   5. Hosts Toggle            Swap dev / default hosts file
 echo.
 echo   FILES
 echo   ------------------------------------------------------
-echo   5. Smart Backup            Incremental robocopy backup
-echo   6. File Organizer          Sort a folder by file type
-echo   7. Large File Hunter       Find the biggest space hogs
+echo   6. Smart Backup            Incremental robocopy backup
+echo   7. File Organizer          Sort a folder by file type
+echo   8. Large File Hunter       Find the biggest space hogs
+echo.
+echo   DEV
+echo   ------------------------------------------------------
+echo   9. Git Quick Helper        Stage + commit + push in one go
 echo.
 echo   OTHER
 echo   ------------------------------------------------------
@@ -49,15 +54,17 @@ if /i "%choice%"=="1" call :run sysinfo_snapshot.bat & goto menu
 if /i "%choice%"=="2" call :run temp_cleaner.bat & goto menu
 if /i "%choice%"=="3" call :run net_quickdiag.bat & goto menu
 if /i "%choice%"=="4" call :run wifi_profile_exporter.bat & goto menu
-if /i "%choice%"=="5" call :run smart_backup.bat & goto menu
-if /i "%choice%"=="6" call :run file_organizer.bat & goto menu
-if /i "%choice%"=="7" call :run large_file_hunter.bat & goto menu
+if /i "%choice%"=="5" call :run hosts_toggle.bat & goto menu
+if /i "%choice%"=="6" call :run smart_backup.bat & goto menu
+if /i "%choice%"=="7" call :run file_organizer.bat & goto menu
+if /i "%choice%"=="8" call :run large_file_hunter.bat & goto menu
+if /i "%choice%"=="9" call :run git_quick_helper.bat & goto menu
 if /i "%choice%"=="r" call :open reports "run System Info Snapshot first" & goto menu
 if /i "%choice%"=="l" call :open logs "run Smart Backup first" & goto menu
 if /i "%choice%"=="x" exit /b
 
 echo.
-echo   [X] Invalid option: "%choice%" - choose 1-7, R, L, or X.
+echo   [X] Invalid option: "%choice%" - choose 1-9, R, L, or X.
 timeout /t 2 >nul
 goto menu
 

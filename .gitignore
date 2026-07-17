@@ -10,8 +10,10 @@ scripts/reports/
 *.bak
 *.old
 
-# Script state (remembered paths, backup logs)
+# Script state (remembered paths, backup logs, hosts profiles)
 scripts/logs/
 scripts/smart_backup.ini
 scripts/file_organizer.ini
 scripts/large_file_hunter.ini
+scripts/git_quick_helper.ini
+scripts/hosts_profiles/

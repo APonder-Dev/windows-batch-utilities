@@ -102,6 +102,28 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
   - Verifies and reports how many profiles were actually exported.
   - Friendly messages when there is no wireless adapter or no saved profiles.
 
+### Hosts Toggle
+- **File:** [`hosts_toggle.bat`](./scripts/hosts_toggle.bat)
+- **Description:** Swaps the Windows hosts file between a DEV profile and your DEFAULT one — handy for local development overrides.
+- **Features:**
+  - Header always shows which profile is currently active (DEV / DEFAULT / unmanaged).
+  - Save the current hosts file as either profile; edit the DEV profile in Notepad.
+  - Switching writes a marker comment, backs up the old hosts to `hosts.previous`, and flushes the DNS cache automatically.
+  - First run offers to snapshot your current hosts as DEFAULT so you can always get back.
+  - Requires Administrator to switch (clearly indicated); viewing and saving profiles work without it.
+  - Profiles stored in `scripts/hosts_profiles/` (gitignored).
+
+### Git Quick Helper
+- **File:** [`git_quick_helper.bat`](./scripts/git_quick_helper.bat)
+- **Description:** Stage, commit, and push any repo in one go — `git add -A`, commit with your message, then push.
+- **Features:**
+  - Shows the branch and a `git status --short` preview before asking anything.
+  - Prompts for the commit message and confirms before touching the repo.
+  - Sets the upstream automatically on first push (`push -u origin <branch>`).
+  - Clean tree with unpushed commits? Offers to just push those instead.
+  - Friendly guards: not a repo, detached HEAD, git missing, or push failure (commit stays safe locally).
+  - Remembers your last repo — just press Enter to reuse it.
+
 ---
 
 ## Installation
@@ -140,7 +162,11 @@ scripts\smart_backup.bat
 scripts\file_organizer.bat
 scripts\large_file_hunter.bat
 scripts\wifi_profile_exporter.bat
+scripts\hosts_toggle.bat
+scripts\git_quick_helper.bat
 ```
+
+> **Tip:** Run `hosts_toggle.bat` as Administrator to switch hosts profiles.
 
 > **Tip:** Run `temp_cleaner.bat` as Administrator to also clean `C:\Windows\Temp`.
 
@@ -150,8 +176,6 @@ scripts\wifi_profile_exporter.bat
 
 Planned future scripts include:
 
-- **Hosts Toggle** — swap between dev and default hosts file.
-- **Git Quick Helper** — `git add + commit + push` shortcut.
 - **Ping Sweep** — scan local subnet for alive hosts.
 - **Windows Update Check** — list available updates (PowerShell required).
 
@@ -174,6 +198,8 @@ Workflow file: `.github/workflows/release.yml`
 .
 ├─ scripts/                  # All batch scripts live here
 │  ├─ file_organizer.bat
+│  ├─ git_quick_helper.bat
+│  ├─ hosts_toggle.bat
 │  ├─ large_file_hunter.bat
 │  ├─ menu_launcher.bat
 │  ├─ net_quickdiag.bat
@@ -181,6 +207,7 @@ Workflow file: `.github/workflows/release.yml`
 │  ├─ sysinfo_snapshot.bat
 │  ├─ temp_cleaner.bat
 │  ├─ wifi_profile_exporter.bat
+│  ├─ hosts_profiles/        # Auto-created by hosts_toggle (gitignored)
 │  ├─ logs/                  # Auto-created by smart_backup (gitignored)
 │  │  └─ backup_<yyyy-MM-dd_HH-mm-ss>.log
 │  └─ reports/               # Auto-created by report-producing tools
