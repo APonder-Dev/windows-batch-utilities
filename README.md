@@ -124,6 +124,17 @@ Each script provides quick automation, diagnostics, or quality-of-life features 
   - Friendly guards: not a repo, detached HEAD, git missing, or push failure (commit stays safe locally).
   - Remembers your last repo — just press Enter to reuse it.
 
+### Ping Sweep
+- **File:** [`ping_sweep.bat`](./scripts/ping_sweep.bat)
+- **Description:** Pings every address on a /24 subnet in parallel and lists the hosts that answer.
+- **Features:**
+  - Auto-detects your subnet from the active adapter — press Enter to scan it, or type another (e.g. `10.0.0`).
+  - All 254 addresses pinged in parallel — a full sweep takes ~10 seconds, not minutes.
+  - Shows round-trip time and resolved hostname for each responder.
+  - Tags your own machine `(this PC)` and the router `(gateway)` in the results.
+  - Optionally saves the results to `scripts/reports/ping_sweep_<yyyy-MM-dd_HH-mm-ss>.txt`.
+  - Notes that devices with ping blocked will not appear.
+
 ---
 
 ## Installation
@@ -164,6 +175,7 @@ scripts\large_file_hunter.bat
 scripts\wifi_profile_exporter.bat
 scripts\hosts_toggle.bat
 scripts\git_quick_helper.bat
+scripts\ping_sweep.bat
 ```
 
 > **Tip:** Run `hosts_toggle.bat` as Administrator to switch hosts profiles.
@@ -176,7 +188,6 @@ scripts\git_quick_helper.bat
 
 Planned future scripts include:
 
-- **Ping Sweep** — scan local subnet for alive hosts.
 - **Windows Update Check** — list available updates (PowerShell required).
 
 ---
@@ -203,6 +214,7 @@ Workflow file: `.github/workflows/release.yml`
 │  ├─ large_file_hunter.bat
 │  ├─ menu_launcher.bat
 │  ├─ net_quickdiag.bat
+│  ├─ ping_sweep.bat
 │  ├─ smart_backup.bat
 │  ├─ sysinfo_snapshot.bat
 │  ├─ temp_cleaner.bat
@@ -212,6 +224,7 @@ Workflow file: `.github/workflows/release.yml`
 │  │  └─ backup_<yyyy-MM-dd_HH-mm-ss>.log
 │  └─ reports/               # Auto-created by report-producing tools
 │     ├─ large_files_<yyyy-MM-dd_HH-mm-ss>.txt
+│     ├─ ping_sweep_<yyyy-MM-dd_HH-mm-ss>.txt
 │     ├─ wifi_profiles_<yyyy-MM-dd_HH-mm-ss>/
 │     └─ <yyyy-MM-dd_HH-mm-ss>/
 │        ├─ systeminfo.txt

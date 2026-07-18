@@ -17,6 +17,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.9.0] - 2026-07-17
+### Added
+- `scripts/ping_sweep.bat` — parallel ping sweep of a /24 subnet (~10 seconds for all 254 addresses via async .NET pings); auto-detects the local subnet with a custom-subnet option; shows round-trip time and resolved hostnames; tags this PC and the gateway; optional report saved to `scripts/reports/ping_sweep_<timestamp>.txt`.
+
+### Changed
+- `scripts/menu_launcher.bat` — Ping Sweep added as option 6 under NETWORK; FILES renumbered to 7-9 and DEV to 10; version bumped in header; taller window.
+- `README.md` — documented Ping Sweep; moved it from Roadmap to Available Scripts; updated repo structure.
+
+---
+
 ## [1.8.0] - 2026-07-17
 ### Added
 - `scripts/git_quick_helper.bat` — stage + commit + push any repo in one go; shows branch and `git status --short` preview before prompting; requires a commit message and confirmation; sets upstream automatically on first push; offers push-only when the tree is clean but commits are unpushed; guards for missing git, non-repos, detached HEAD, and failed pushes; remembers the last repo in `git_quick_helper.ini`.
@@ -118,7 +128,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.7.0...v1.8.0
 [1.7.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/APonder-Dev/windows-batch-utilities/compare/v1.5.0...v1.6.0
